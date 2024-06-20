@@ -71,6 +71,9 @@ class WPSPI_Smart_Pipedrive_API {
     }
     
     function getRefreshToken( $token ) {
+
+        if (is_object($token) && isset($token->refresh_token)) {
+
         $data = array(
             'client_id'     => $this->client_id,
             'client_secret' => $this->client_secret,
@@ -100,8 +103,8 @@ class WPSPI_Smart_Pipedrive_API {
         }
         
         return $response;
+        }
     }
-    
     function manageToken( $token ){
         $old_token = get_option( 'wpspi_smart_pipedrive' );
         if ( ! isset( $token->refresh_token ) && $old_token ) {
