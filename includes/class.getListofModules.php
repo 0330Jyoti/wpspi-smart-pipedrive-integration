@@ -2,6 +2,7 @@
 class GetListofModules{
     
     public function execute($token){
+      if (is_object($token) && isset($token->access_token)) {
         $url = WPSPI_PIPEDRIVEAPIS_URL."/crm/v2/settings/modules";
         
         $curl = curl_init();
@@ -23,5 +24,6 @@ class GetListofModules{
         curl_close($curl);
 
         return $response;
+      }
     }
 }
