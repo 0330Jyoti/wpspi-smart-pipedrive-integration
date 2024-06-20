@@ -10,9 +10,9 @@ class WPSPI_Smart_Pipedrive_API {
 
         $wpspi_smart_pipedrive_settings     = get_option( 'wpspi_smart_pipedrive_settings' );
 
-        $client_id                  = esc_attr($wpspi_smart_pipedrive_settings['client_id']);
-        $client_secret              = esc_attr($wpspi_smart_pipedrive_settings['client_secret']);
-        $wpspi_smart_pipedrive_data_center  = esc_attr($wpspi_smart_pipedrive_settings['data_center']);
+        $client_id                  = isset($wpspi_smart_pipedrive_settings['client_id']) ? esc_attr($wpspi_smart_pipedrive_settings['client_id']) : '';
+        $client_secret              = isset($wpspi_smart_pipedrive_settings['client_secret']) ? esc_attr($wpspi_smart_pipedrive_settings['client_secret']) : '';
+        $wpspi_smart_pipedrive_data_center  = isset($wpspi_smart_pipedrive_settings['data_center']) ? esc_attr($wpspi_smart_pipedrive_settings['data_center']) : '';
 
         $wpspi_smart_pipedrive_data_center    = ( $wpspi_smart_pipedrive_data_center ? $wpspi_smart_pipedrive_data_center : 'https://accounts.pipedrive.com' );
 
