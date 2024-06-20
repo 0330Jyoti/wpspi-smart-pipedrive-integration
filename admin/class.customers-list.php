@@ -6,12 +6,12 @@ if (!class_exists('WP_List_Table'))
     require_once (ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
   }
 
-function usersFinalDataed($users_data)
+function usersFinalData($users_data)
   {
     return $users_data['data'];
   }
 
-class Customers_Listed extends WP_List_Table{
+class Customers_List extends WP_List_Table{
     /** Class constructor */
     public function __construct(){
         parent::__construct(['singular'     => esc_html__('Customer', 'wpspi-smart-pipedrive') , //singular name of the listed records
