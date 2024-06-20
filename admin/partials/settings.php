@@ -31,39 +31,6 @@
 			
 			<table class="form-table general_settings">
 				<tbody>
-					<tr>
-						<th scope="row"><label><?php echo esc_html__( 'Data Center', 'wpspi-smart-pipedrive' ); ?></label></th>
-						<td>
-							<fieldset>
-								<label>
-									<input 
-										type="radio" 
-										name="wpspi_smart_pipedrive_settings[data_center]" 
-										value="https://accounts.pipedrive.com"
-										<?php echo esc_html( $wpspi_smart_pipedrive_data_center == 'https://accounts.pipedrive.com' ? ' checked="checked"' : '' ); ?> />
-										United States (US)
-								</label><br>
-
-								<label>
-									<input 
-										type="radio" 
-										name="wpspi_smart_pipedrive_settings[data_center]" 
-										value="https://accounts.pipedrive.eu"
-										<?php echo esc_html( $wpspi_smart_pipedrive_data_center == 'https://accounts.pipedrive.eu' ? ' checked="checked"' : '' ); ?> />
-										Europe (EU)
-								</label><br>
-
-								<label>
-									<input 
-										type="radio" 
-										name="wpspi_smart_pipedrive_settings[data_center]" 
-										value="https://accounts.pipedrive.com.cn"
-										<?php echo esc_html( $wpspi_smart_pipedrive_data_center == 'https://accounts.pipedrive.com.cn' ? ' checked="checked"' : '' ); ?> />
-										China (CN)
-								</label>
-							</fieldset>
-						</td>
-					</tr>
 
 					<tr>
 						<th scope="row">
