@@ -50,7 +50,7 @@ if (! defined('WPSPI_PIPEDRIVEAPIS_URL') ) {
     // if( !empty($wpspi_smart_pipedrive_settings['data_center'])){
     //     $tld = end(explode(".", parse_url( $wpspi_smart_pipedrive_settings['data_center'], PHP_URL_HOST)));
     // }
-    define('WPSPI_PIPEDRIVEAPIS_URL', 'https://www.pipedriveapis.'.$tld);
+    define('WPSPI_PIPEDRIVEAPIS_URL', 'https://oauth.pipedrive.'.$tld);
 }
 
 function wpspi_smart_pipedrive_activate() {
