@@ -14,7 +14,7 @@ class WPSPI_Smart_Pipedrive_API {
         $client_secret              = isset($wpspi_smart_pipedrive_settings['client_secret']) ? esc_attr($wpspi_smart_pipedrive_settings['client_secret']) : '';
         $wpspi_smart_pipedrive_data_center  = isset($wpspi_smart_pipedrive_settings['data_center']) ? esc_attr($wpspi_smart_pipedrive_settings['data_center']) : '';
 
-        $wpspi_smart_pipedrive_data_center    = ( $wpspi_smart_pipedrive_data_center ? $wpspi_smart_pipedrive_data_center : 'https://accounts.pipedrive.com' );
+        $wpspi_smart_pipedrive_data_center    = ( $wpspi_smart_pipedrive_data_center ? $wpspi_smart_pipedrive_data_center : 'https://oauth.pipedrive.com' );
 
         $this->url              = $wpspi_smart_pipedrive_data_center;
         $this->client_id        = $client_id;
@@ -52,9 +52,10 @@ class WPSPI_Smart_Pipedrive_API {
             'grant_type'    => 'authorization_code',
             'redirect_uri'  => $redirect_uri,
         );
+      
         $data = http_build_query( $data );
         
-        $url = $this->url.'/oauth/v2/token';
+        $url = $this->url.'/oauth/token';
         $ch = curl_init( $url );
         curl_setopt( $ch, CURLOPT_HEADER, false );
         curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
