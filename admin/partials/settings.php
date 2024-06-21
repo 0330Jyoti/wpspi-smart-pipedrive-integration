@@ -7,7 +7,7 @@
 	$client_secret 					= isset($wpspi_smart_pipedrive_settings['client_secret']) ? $wpspi_smart_pipedrive_settings['client_secret'] : "";
 	$wpspi_smart_pipedrive_data_center 	= isset($wpspi_smart_pipedrive_settings) ? $wpspi_smart_pipedrive_settings['data_center'] : "";
 
-	$wpspi_smart_pipedrive_data_center 	= ( $wpspi_smart_pipedrive_data_center ? $wpspi_smart_pipedrive_data_center : 'https://accounts.pipedrive.com' );
+	$wpspi_smart_pipedrive_data_center 	= ( $wpspi_smart_pipedrive_data_center ? $wpspi_smart_pipedrive_data_center : 'https://oauth.pipedrive.com' );
 ?>
 
 <div class="wrap">                

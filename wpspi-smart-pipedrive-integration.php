@@ -37,7 +37,7 @@ if (! defined('WPSPI_PLUGIN_URL') ) {
 }
 
 if (! defined('WPSPI_REDIRECT_URI') ) {
-    define('WPSPI_REDIRECT_URI', admin_url( 'admin.php?page=wpspi-smart-pipedrive-integration' ));
+    define('WPSPI_REDIRECT_URI', admin_url( 'admin.php?page=wpszi_smart_pipedrive_process' ));
 }
 
 if (! defined('WPSPI_SETTINGS_URI') ) {
