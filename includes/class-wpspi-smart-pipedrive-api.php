@@ -16,7 +16,7 @@ class WPSPI_Smart_Pipedrive_API {
 
         $wpspi_smart_pipedrive_data_center    = ( $wpspi_smart_pipedrive_data_center ? $wpspi_smart_pipedrive_data_center : 'https://oauth.pipedrive.com' );
 
-        $this->url              = $url;
+        $this->url              = $wpspi_smart_pipedrive_data_center;
         $this->client_id        = $client_id;
         $this->client_secret    = $client_secret;
         $this->token            = get_option( 'wpspi_smart_pipedrive' );
