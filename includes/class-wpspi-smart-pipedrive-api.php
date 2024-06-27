@@ -16,12 +16,12 @@ class WPSPI_Smart_Pipedrive_API {
 
         $wpspi_smart_pipedrive_data_center    = ( $wpspi_smart_pipedrive_data_center ? $wpspi_smart_pipedrive_data_center : 'https://oauth.pipedrive.com' );
 
-        $this->url              = $wpspi_smart_pipedrive_data_center;
+        $this->url              = $url;
         $this->client_id        = $client_id;
         $this->client_secret    = $client_secret;
         $this->token            = get_option( 'wpspi_smart_pipedrive' );
 
-        // Get any existing copy of our transient data
+        //Get any existing copy of our transient data
         if ( false === ( $wpspi_smart_pipedrive_expire = get_transient( 'wpspi_smart_pipedrive_expire' ) ) ) {
             
             $this->getRefreshToken($this->token);
@@ -45,69 +45,86 @@ class WPSPI_Smart_Pipedrive_API {
 
     function getToken( $code, $redirect_uri ) {
         
-        $data = array(
-            'client_id'     => $this->client_id,
-            'client_secret' => $this->client_secret,
-            'code'          => $code,
-            'grant_type'    => 'authorization_code',
-            'redirect_uri'  => $redirect_uri,
-        );
-      
-        $data = http_build_query( $data );
-        
-        $url = $this->url.'/oauth/token';
-        $ch = curl_init( $url );
-        curl_setopt( $ch, CURLOPT_HEADER, false );
-        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-        curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );        
-        curl_setopt( $ch, CURLOPT_POST, true );
-        curl_setopt( $ch, CURLOPT_POSTFIELDS, $data );
-        $json_response = curl_exec( $ch ); 
-        curl_getinfo( $ch, CURLINFO_HTTP_CODE );
-        curl_close( $ch );
-        
-        $response = json_decode( $json_response );
+        $client_id   = $this->client_id;
+        $user_secret = $this->client_secret;
+        $auth        = base64_encode($client_id . ':' . $user_secret);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL =>  $this->url.'/oauth/token',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+          CURLOPT_POSTFIELDS => 'grant_type=authorization_code&code='.$code.'&redirect_uri='.$redirect_uri.'',
+          CURLOPT_HTTPHEADER => array(
+            'Authorization: Basic '.$auth.'',
+          ),
+        ));
+
+        $response = curl_exec($curl);
         
         return $response;
     }
-    
-    function getRefreshToken( $token ) {
 
-        if (is_object($token) && isset($token->refresh_token)) {
+    function getRefreshToken($token) {
 
-        $data = array(
-            'client_id'     => $this->client_id,
-            'client_secret' => $this->client_secret,
-            'grant_type'    => 'refresh_token',
-            'refresh_token' => $token->refresh_token,
-        );
-        $data = http_build_query( $data );
-        
-        $url = $this->url.'/oauth/v2/token';
-        $ch = curl_init( $url );
-        curl_setopt( $ch, CURLOPT_HEADER, false );
-        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-        curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );        
-        curl_setopt( $ch, CURLOPT_POST, true );
-        curl_setopt( $ch, CURLOPT_POSTFIELDS, $data );
-        $json_response = curl_exec( $ch ); 
-        curl_getinfo( $ch, CURLINFO_HTTP_CODE );
-        curl_close( $ch );
-        
-        $response = json_decode( $json_response );
-        
-        if ( isset( $response->access_token ) ) {
-            $token->access_token = $response->access_token;
-            $wpspi_smart_pipedrive_expire = 'Expire_Management';
-            set_transient( 'wpspi_smart_pipedrive_expire', $wpspi_smart_pipedrive_expire, 3500 );
-            update_option( 'wpspi_smart_pipedrive', $token );
+       if (is_string($token)) {
+            $token = json_decode($token);
         }
-        
+
+            $client_id   = $this->client_id;
+            $user_secret = $this->client_secret;
+            $auth        = base64_encode($client_id . ':' . $user_secret);
+            $data = http_build_query(array(
+                    'grant_type'    => 'refresh_token',
+                    'refresh_token' => $token->refresh_token,
+                ));
+            $access_token = $token->access_token;
+
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $this->url.'/oauth/token/',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => $data,
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: Basic ' . $auth,
+                    'Content-Type: application/x-www-form-urlencoded',
+                ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            if (isset($response->access_token)) {
+                $token->access_token = $response->access_token;
+                $wpspi_smart_pipedrive_expire = 'Expire_Management';
+                set_transient('wpspi_smart_pipedrive_expire', $wpspi_smart_pipedrive_expire, 3500);
+                update_option('wpspi_smart_pipedrive', $token);
+            }
+
         return $response;
-        }
-    }
+    } 
+
+
     function manageToken( $token ){
+
         $old_token = get_option( 'wpspi_smart_pipedrive' );
+        if (is_string($token)) {
+            $token = json_decode($token);
+        }
+
         if ( ! isset( $token->refresh_token ) && $old_token ) {
             $old_token->access_token = $token->access_token;
             $token = $old_token;

@@ -189,7 +189,7 @@ class WPSPI_Smart_Pipedrive_Admin {
                         NULL, 
                         NULL, 
                         'manage_options', 
-                        'wpspi-smart-pipedrive-integration', 
+                        'wpszi_smart_pipedrive_process', 
                         array($this, 'pipedrive_process_callback')
                     );
     }
