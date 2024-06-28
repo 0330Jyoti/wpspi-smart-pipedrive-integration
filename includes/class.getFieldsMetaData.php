@@ -1,211 +1,53 @@
 <?php
 class GetFieldsMetaData{
     public function execute($module = NULL){
+
         if ($module == 'leads') {
-        $GetFieldsMetaData = array(
-                                    'fields' => array(
-                                                        'LEAD_ID' => array(
-                                                                    'system_mandatory' => 1,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Lead ID',
-                                                                    'api_name' => 'LEAD_ID'
-                                                                ),
-                                                        'FIRST_NAME' => array(
-                                                                    'system_mandatory' => 1,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'First Name',
-                                                                    'api_name' => 'FIRST_NAME'
-                                                                ),
-                                                        'LAST_NAME' => array(
-                                                                    'system_mandatory' => 1,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Last Name',
-                                                                    'api_name' => 'LAST_NAME'
-                                                                ),
-                                                        'PHONE' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Phone Number',
-                                                                    'api_name' => 'PHONE'
-                                                                ),
-                                                        'EMAIL' => array(
-                                                                    'system_mandatory' => 1,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Email',
-                                                                    'api_name' => 'EMAIL'
-                                                                ),
-                                                 
-                                                        'LEAD_DESCRIPTION' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Lead Description',
-                                                                    'api_name' => 'LEAD_DESCRIPTION'
-                                                                ),
-                                                         'ADDRESS_CITY' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Address City',
-                                                                    'api_name' => 'ADDRESS_CITY'
-                                                                ),
-                                                       'LEAD_SOURCE_ID' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Lead Source ID',
-                                                                    'api_name' => 'LEAD_SOURCE_ID'
-                                                                ),
-                                                        'LEAD_STATUS_ID' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Lead Status ID',
-                                                                    'api_name' => 'LEAD_STATUS_ID'
-                                                                ),
+                    $GetFieldsMetaData = array(
+                                                'fields' => array(
+                                                                    'LEAD_ID' => array(
+                                                                                'system_mandatory' => 1,
+                                                                                'field_read_only' => '',
+                                                                                'display_label' => 'Lead ID',
+                                                                                'api_name' => 'LEAD_ID'
+                                                                            ),
+                                                                    'FIRST_NAME' => array(
+                                                                                'system_mandatory' => 1,
+                                                                                'field_read_only' => '',
+                                                                                'display_label' => 'First Name',
+                                                                                'api_name' => 'FIRST_NAME'
+                                                                            ),
+                                                                    'LAST_NAME' => array(
+                                                                                'system_mandatory' => 1,
+                                                                                'field_read_only' => '',
+                                                                                'display_label' => 'Last Name',
+                                                                                'api_name' => 'LAST_NAME'
+                                                                            ),
+                                                                    'PHONE' => array(
+                                                                                'system_mandatory' => 0,
+                                                                                'field_read_only' => '',
+                                                                                'display_label' => 'Phone Number',
+                                                                                'api_name' => 'PHONE'
+                                                                            ),
+                                                                    'EMAIL' => array(
+                                                                                'system_mandatory' => 1,
+                                                                                'field_read_only' => '',
+                                                                                'display_label' => 'Email',
+                                                                                'api_name' => 'EMAIL'
+                                                                            ),
+                                                             
+                                                                    'LEAD_DESCRIPTION' => array(
+                                                                                'system_mandatory' => 0,
+                                                                                'field_read_only' => '',
+                                                                                'display_label' => 'Lead Description',
+                                                                                'api_name' => 'LEAD_DESCRIPTION'
+                                                                            ),    
+                                                                
+                                                    ),
+                                            );
 
-                                                        'TITLE' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Title',
-                                                                    'api_name' => 'TITLE'
-                                                                ),
-                                                        'CONVERTED_CONTACT_ID' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Converted Contact ID',
-                                                                    'api_name' => 'CONVERTED_CONTACT_ID'
-                                                                ),
-                                                        'CONVERTED_DATE_UTC' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Converted Date UTC',
-                                                                    'api_name' => 'CONVERTED_DATE_UTC'
-                                                                ),
-                                                 
-                                                        'CONVERTED_OPPORTUNITY_ID' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Converted Opportunity ID',
-                                                                    'api_name' => 'CONVERTED_OPPORTUNITY_ID'
-                                                                ),
-                                                         'CONVERTED_ORGANISATION_ID' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Converted Organisation ID',
-                                                                    'api_name' => 'CONVERTED_ORGANISATION_ID'
-                                                                ),
-                                                          'DATE_CREATED_UTC' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Date Created UTC',
-                                                                    'api_name' => 'DATE_CREATED_UTC'
-                                                                ),
-                                                         'DATE_UPDATED_UTC' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Date Update UTC',
-                                                                    'api_name' => 'DATE_UPDATED_UTC'
-                                                                ),
-                                                         'EMPLOYEE_COUNT' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Employee Count',
-                                                                    'api_name' => 'EMPLOYEE_COUNT'
-                                                                ),
-                                                        'FAX' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Fax',
-                                                                    'api_name' => 'FAX'
-                                                                ),
-                                                        'INDUSTRY' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Industry',
-                                                                    'api_name' => 'INDUSTRY'
-                                                                ),
-                                                        'LEAD_RATING' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Lead Rating',
-                                                                    'api_name' => 'LEAD_RATING'
-                                                                ),
-                                                        'MOBILE' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Mobile',
-                                                                    'api_name' => 'MOBILE'
-                                                                ),
-                                                 
-                                                        'OWNER_USER_ID' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Owner User ID',
-                                                                    'api_name' => 'OWNER_USER_ID'
-                                                                ),
-                                                        'RESPONSIBLE_USER_ID' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Responsible User ID',
-                                                                    'api_name' => 'RESPONSIBLE_USER_ID'
-                                                                ),
-                                                       'WEBSITE' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Website',
-                                                                    'api_name' => 'WEBSITE'
-                                                                ),
-                                                        'ADDRESS_STREET' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Address Street',
-                                                                    'api_name' => 'ADDRESS_STREET'
-                                                                ),
-
-                                                        'ADDRESS_CITY' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Address City',
-                                                                    'api_name' => 'ADDRESS_CITY'
-                                                                ),
-                                                        'ADDRESS_STATE' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Address State',
-                                                                    'api_name' => 'ADDRESS_STATE'
-                                                                ),
-                                                        'ADDRESS_POSTCODE' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Address Postcode',
-                                                                    'api_name' => 'ADDRESS_POSTCODE'
-                                                                ),
-                                                 
-                                                        'ADDRESS_COUNTRY' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Converted Opportunity ID',
-                                                                    'api_name' => 'Address Country'
-                                                                ),
-                                                        'LAST_ACTIVITY_DATE_UTC' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Last Activity Date UTC',
-                                                                    'api_name' => 'LAST_ACTIVITY_DATE_UTC'
-                                                                ),
-                                                        'ORGANISATION_NAME' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Organisation Name',
-                                                                    'api_name' => 'ORGANISATION_NAME'
-                                                                ),
-                                                        'TAGS' => array(
-                                                                    'system_mandatory' => 0,
-                                                                    'field_read_only' => '',
-                                                                    'display_label' => 'Tags',
-                                                                    'api_name' => 'TAGS'
-                                                                ),
-                                        ),
-                                ); 
-                }elseif ($module == 'Contacts') {
-                     
+                    }elseif ($module == 'Contacts') {
+ 
                      $GetFieldsMetaData = array(
                                         'fields' => array(
                                                         'FIRST_NAME' => array(
