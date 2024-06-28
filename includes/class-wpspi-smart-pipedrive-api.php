@@ -36,7 +36,7 @@ class WPSPI_Smart_Pipedrive_API {
     }
 
     function getListModules(){
-        return (new GetListofModules())->execute($this->token);
+        return (new GetListofModules())->execute();
     }
 
     function getFieldsMetaData( $module_name = NULL ){
