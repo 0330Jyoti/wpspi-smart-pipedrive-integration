@@ -45,12 +45,7 @@ if (! defined('WPSPI_SETTINGS_URI') ) {
 }
 
 if (! defined('WPSPI_PIPEDRIVEAPIS_URL') ) {
-    $tld = "com";
-    // $wpspi_smart_pipedrive_settings  = get_option( 'wpspi_smart_pipedrive_settings' );
-    // if( !empty($wpspi_smart_pipedrive_settings['data_center'])){
-    //     $tld = end(explode(".", parse_url( $wpspi_smart_pipedrive_settings['data_center'], PHP_URL_HOST)));
-    // }
-    define('WPSPI_PIPEDRIVEAPIS_URL', 'https://oauth.pipedrive.'.$tld);
+    define('WPSPI_PIPEDRIVEAPIS_URL', 'https://api.pipedrive.com');
 }
 
 function wpspi_smart_pipedrive_activate() {
