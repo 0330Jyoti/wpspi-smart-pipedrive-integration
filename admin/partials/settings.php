@@ -1,11 +1,9 @@
 <?php
 	
-	$wpspi_smart_pipedrive 				= get_option( 'wpspi_smart_pipedrive' );
-	$wpspi_smart_pipedrive_settings 		= get_option( 'wpspi_smart_pipedrive_settings' );
-
+	$wpspi_smart_pipedrive 			= get_option( 'wpspi_smart_pipedrive' );
+	$wpspi_smart_pipedrive_settings = get_option( 'wpspi_smart_pipedrive_settings' );
 	$apitoken 						=  isset($wpspi_smart_pipedrive_settings['psn-token']) ? $wpspi_smart_pipedrive_settings['psn-token'] : "";
 
-	$wpspi_smart_pipedrive_data_center 	= ( $wpspi_smart_pipedrive_data_center ? $wpspi_smart_pipedrive_data_center : 'https://oauth.pipedrive.com' );
 ?>
 
 <div class="wrap">                
