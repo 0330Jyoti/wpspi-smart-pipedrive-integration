@@ -3,9 +3,7 @@
 	$wpspi_smart_pipedrive 				= get_option( 'wpspi_smart_pipedrive' );
 	$wpspi_smart_pipedrive_settings 		= get_option( 'wpspi_smart_pipedrive_settings' );
 
-	$client_id 						=  isset($wpspi_smart_pipedrive_settings['client_id']) ? $wpspi_smart_pipedrive_settings['client_id'] : "";
-	$client_secret 					= isset($wpspi_smart_pipedrive_settings['client_secret']) ? $wpspi_smart_pipedrive_settings['client_secret'] : "";
-	$wpspi_smart_pipedrive_data_center 	= isset($wpspi_smart_pipedrive_settings) ? $wpspi_smart_pipedrive_settings['data_center'] : "";
+	$apitoken 						=  isset($wpspi_smart_pipedrive_settings['psn-token']) ? $wpspi_smart_pipedrive_settings['psn-token'] : "";
 
 	$wpspi_smart_pipedrive_data_center 	= ( $wpspi_smart_pipedrive_data_center ? $wpspi_smart_pipedrive_data_center : 'https://oauth.pipedrive.com' );
 ?>
@@ -34,58 +32,14 @@
 
 					<tr>
 						<th scope="row">
-							<label><?php echo esc_html__( 'Client ID', 'wpspi-smart-pipedrive' ); ?></label>
+							<label><?php echo esc_html__( 'API Token', 'wpspi-smart-pipedrive' ); ?></label>
 						</th>
 						<td>
-							<input class="regular-text" type="text" name="wpspi_smart_pipedrive_settings[client_id]" value="<?php echo esc_attr($client_id); ?>" required />
+							<input class="regular-text" type="text" name="wpspi_smart_pipedrive_settings[psn-token]" value="<?php echo esc_attr($apitoken); ?>" required />
+							<br>
+							<a href="https://app.pipedrive.com/settings/api">Get API key</a>
 						</td>
-					</tr>
-
-					<tr>
-						<th scope="row">
-							<label><?php echo esc_html__( 'Client Secret', 'wpspi-smart-pipedrive' ); ?></label>
-						</th>
-						<td>
-							<input class="regular-text" type="text" name="wpspi_smart_pipedrive_settings[client_secret]" value="<?php echo esc_attr($client_secret); ?>" required />
-						</td>
-					</tr>
-
-					<tr>
-						<th scope="row">
-							<label><?php echo esc_attr( 'Redirect URI', 'wpspi-smart-pipedrive' ); ?></label>
-						</th>
-						<td>
-							<input class="regular-text" type="text" value="<?php echo esc_url(WPSPI_REDIRECT_URI); ?>" readonly />
-						</td>
-					</tr>
-
-					<tr>
-						<th scope="row">
-							<label><?php echo esc_html__( 'Access Token', 'wpspi-smart-pipedrive' ); ?></label>
-						</th>
-						<td>
-							
-							<?php 
-								if(isset($wpspi_smart_pipedrive->access_token)){
-									echo esc_html($wpspi_smart_pipedrive->access_token);
-								}
-							?>
-						</td>
-					</tr>
-
-					<tr>
-						<th scope="row">
-							<label><?php echo esc_html__( 'Refresh Token', 'wpspi-smart-pipedrive' ); ?></label>
-						</th>
-						<td>
-							<?php 
-								if(isset($wpspi_smart_pipedrive->refresh_token)){
-									echo esc_html($wpspi_smart_pipedrive->refresh_token);
-								}
-							?>
-						</td>
-					</tr>
-					
+					</tr>				
 				</tbody>
 			</table>
 
@@ -93,12 +47,6 @@
 				<p>
 					<input type='submit' class='button-primary' name="submit" value="<?php echo esc_html__( 'Save & Authorize', 'wpspi-smart-pipedrive' ); ?>" />
 				</p>
-
-				<?php 
-					if(isset($wpspi_smart_pipedrive->refresh_token)){
-						echo '<p class="success">'.esc_html__('Authorized', 'wpspi-smart-pipedrive').'</p>';
-					}
-				?>
 			</div>
 
 		<?php }else if( isset($tab) && 'synch_settings' == $tab ){ ?>
