@@ -31,7 +31,8 @@ class WPSPI_Smart_Pipedrive_API {
     }
     
     function addRecord( $module, $data ) {
-        
+
+        $json = json_encode( $data );
         $header = array(
             'Content-Type: application/json',
         );
@@ -51,23 +52,18 @@ class WPSPI_Smart_Pipedrive_API {
         $response = json_decode( $json_response );
         
         if ( isset($response->error) && !empty($response->error) ) {
-            $log = "errorCode: " . $response->errorCode . "\n";
+            $log = "errorCode: " . $response->error_info . "\n";
             $log .= "message: " . $response->error . "\n";
             $log .= "Date: " . date('Y-m-d H:i:s') . "\n\n";
 
             file_put_contents(WPSPI_PLUGIN_PATH . 'debug.log', $log, FILE_APPEND);
         }
-
+        
         return $response;
     }
     
     function updateRecord( $module, $data, $record_id ) {
-        
-        $data = array(
-            'data'  => array(
-                $data,
-            ),
-        );
+
         
         $data = json_encode( $data );
         $header = array(
