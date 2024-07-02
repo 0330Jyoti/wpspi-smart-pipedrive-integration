@@ -25,9 +25,11 @@ class Order_Listed extends WP_List_Table {
 	 * @return mixed
 	 */
 	public static function get_order( $per_page = 10, $page_number = 1) {
-		global $wpdb;
-		$orderTableName = $wpdb->prefix.'posts';
-		$orderSql = "SELECT $orderTableName.ID, $orderTableName.post_date FROM $orderTableName WHERE $orderTableName.post_type = 'shop_order' AND post_status != 'draft'";
+			global $wpdb;
+
+		$orderTableName = $wpdb->prefix.'wc_orders';
+		$orderSql = "SELECT $orderTableName.id, $orderTableName.date_created_gmt FROM $orderTableName";
+
 		if ( ! empty( $_REQUEST['orderby'] ) ) {
 			$orderSql .= ' ORDER BY ' . esc_sql( $_REQUEST['orderby'] );
 			$orderSql .= ! empty( $_REQUEST['order'] ) ? ' ' . esc_sql( $_REQUEST['order'] ) : ' ASC';
@@ -36,7 +38,8 @@ class Order_Listed extends WP_List_Table {
 		$orderSql .= ' OFFSET ' . ( $page_number - 1 ) * $per_page;
 		
 		$orderData = $wpdb->get_results( $orderSql, 'ARRAY_A' );
-		$orderResult = json_decode(json_encode($orderData), true);			
+		$orderResult = json_decode(json_encode($orderData), true);	
+		
 		return $orderResult;
 	}
 
@@ -65,8 +68,8 @@ class Order_Listed extends WP_List_Table {
 	 */
 	public function column_default( $item, $column_name ) {
 		switch ( $column_name ) {
-			case 'ID':
-			case 'post_date':
+			case 'id':
+			case 'date_created_gmt':
 				return $item[ $column_name ];
 			default:
 				return print_r( $item, true ); //Show the whole array for troubleshooting purposes
@@ -84,7 +87,7 @@ class Order_Listed extends WP_List_Table {
 	function column_action( $item ) {							
 		$action = '<form action="" method="post">                      
 						<input name="wp_module" value="orders" type="hidden" />
-						<input name="id" value="'.esc_attr($item['ID']).'" type="hidden" />
+						<input name="id" value="'.esc_attr($item['id']).'" type="hidden" />
 						<button class="button" name="smart_synch" value="pipedrive" type="submit">'.esc_html__('Sync', 'wpspi-smart-pipedrive').'</button>
 					</form>';
 		return $action;
@@ -97,8 +100,8 @@ class Order_Listed extends WP_List_Table {
 	 */
 	function get_columns() {
 		$columns = [
-			'ID'    	=> esc_html__( 'Order Id', 'wpspi-smart-pipedrive' ),
-			'post_date' => esc_html__( 'Create Time', 'wpspi-smart-pipedrive' ),
+			'id'    	=> esc_html__( 'Order Id', 'wpspi-smart-pipedrive' ),
+			'date_created_gmt' => esc_html__( 'Create Time', 'wpspi-smart-pipedrive' ),
 			'action'    => esc_html__( 'Action', 'wpspi-smart-pipedrive' )
 		];
 		return $columns;
@@ -112,8 +115,8 @@ class Order_Listed extends WP_List_Table {
 	
 	public function get_sortable_columns() {
 		$sortable_columns = array(
-			'ID' => array( 'ID', true ),
-			'post_date' => array( 'post_date', true )
+			'id' => array( 'id', true ),
+			'date_created_gmt' => array( 'date_created_gmt', true )
 		);
 		return $sortable_columns;
 	}
