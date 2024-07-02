@@ -186,7 +186,14 @@ class WPSPI_Smart_Pipedrive_Public {
             }else{
                 $response = $pipedrive_api_obj->addRecord($pipedrive_module, $pipedrive_data);
             }
-                        
+            
+            echo "<pre>";
+            echo "sssss";
+            print_r($record_id);
+            echo "</pre>";
+            exit;
+
+
             if ( isset( $response->data[0]->details->id ) ) {
                 $record_id = $response->data[0]->details->id;
                 $smart_pipedrive_relation[$pipedrive_module] = $record_id;
