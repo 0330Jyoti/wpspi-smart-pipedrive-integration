@@ -6,9 +6,7 @@ class WPSPI_Smart_Pipedrive_Admin_Synchronization {
        	if ( isset( $_POST['submit'] ) ) {
 
             if(isset($_REQUEST['tab']) && $_REQUEST['tab'] == "general"){
-                $client_id                  = sanitize_text_field($_REQUEST['wpspi_smart_pipedrive_settings']['client_id']);
-                $client_secret              = sanitize_text_field($_REQUEST['wpspi_smart_pipedrive_settings']['client_secret']);
-                $wpspi_smart_pipedrive_data_center  = sanitize_text_field($_REQUEST['wpspi_smart_pipedrive_settings']['data_center']);
+                $api_key                  = sanitize_text_field($_REQUEST['wpspi_smart_pipedrive_settings']['psn-token']);
             }
                         
             $wpspi_smart_pipedrive_settings  = !empty(get_option( 'wpspi_smart_pipedrive_settings' )) ? get_option( 'wpspi_smart_pipedrive_settings' ) : array();
