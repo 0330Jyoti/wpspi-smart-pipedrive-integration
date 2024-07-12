@@ -59,9 +59,11 @@ function wpspi_smart_pipedrive_activate() {
  * This action is documented in includes/class-wpspi-smart-pipedrive-deactivator.php
  */
 function wpspi_smart_pipedrive_deactivate() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class.deactivator.php';
-    WPSPI_Smart_Pipedrive_Deactivator::deactivate();
+    require_once plugin_dir_path(__FILE__) . 'includes/class.deactivator.php';
+    $deactivator = new WPSPI_Smart_Pipedrive_Deactivator();
+    $deactivator->deactivate();
 }
+
 
 
 /**
